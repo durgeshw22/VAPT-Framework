@@ -1,0 +1,63 @@
+===============================================
+QUICK INSTALL - Run These Commands on Kali
+===============================================
+
+If install.sh fails, run these commands manually:
+
+# 1. Install system packages
+sudo apt update
+sudo apt install -y python3-pip golang-go curl jq dos2unix
+
+# 2. Install Python packages (try both methods)
+pip3 install colorama requests --break-system-packages
+# OR if above fails:
+pip3 install colorama requests
+
+# 3. Setup Go environment
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+mkdir -p ~/go/bin
+echo 'export GOPATH=$HOME/go' >> ~/.bashrc
+echo 'export PATH=$PATH:$GOPATH/bin' >> ~/.bashrc
+
+# 4. Install Go tools (9 tools)
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install github.com/tomnomnom/assetfinder@latest
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+go install github.com/ffuf/ffuf@latest
+go install github.com/OJ/gobuster/v3@latest
+go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
+go install github.com/sensepost/gowitness@latest
+go install github.com/michenriksen/aquatone@latest
+go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+
+# 5. Install system tools
+sudo apt install -y nmap masscan nikto sqlmap dirb whatweb
+
+# 6. Install Python tools
+pip3 install arjun --break-system-packages || pip3 install arjun
+
+# 7. Reload shell
+source ~/.bashrc
+
+# 8. Verify installation
+./verify_install.sh
+
+# 9. Run framework
+python3 reconvapt.py
+
+===============================================
+TROUBLESHOOTING
+===============================================
+
+If "pip3 install" fails with externally-managed error:
+  Use: pip3 install <package> --break-system-packages
+
+If Go tools not found after install:
+  Run: export PATH=$PATH:~/go/bin
+  Then: source ~/.bashrc
+
+If verify_install.sh shows missing tools:
+  Run the specific install command for that tool
+
+===============================================
